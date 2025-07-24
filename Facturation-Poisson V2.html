@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aicha Petit Terrain | Grill - Système de facturation</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f9fafb;
+            color: #111827;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.25rem;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            padding: 0.75rem;
+        }
+        
+        .sticky {
+            position: sticky;
+            top: 1rem;
+            height: fit-content;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        
+        .text-gray-600 {
+            color: #4b5563;
+        }
+        
+        .text-gray-800 {
+            color: #1f2937;
+        }
+        
+        .text-blue-800 {
+            color: #1e40af;
+        }
+        
+        .text-green-800 {
+            color: #166534;
+        }
+        
+        .text-red-500 {
+            color: #ef4444;
+        }
+        
+        .hover\:text-red-700:hover {
+            color: #b91c1c;
+        }
+        
+        .bg-white {
+            background-color: white;
+        }
+        
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+        
+        .bg-blue-50 {
+            background-color: #eff6ff;
+        }
+        
+        .bg-green-50 {
+            background-color: #f0fdf4;
+        }
+        
+        .bg-blue-100:hover {
+            background-color: #dbeafe;
+        }
+        
+        .bg-green-100:hover {
+            background-color: #dcfce7;
+        }
+        
+        .bg-gray-300 {
+            background-color: #d1d5db;
+        }
+        
+        .bg-green-600 {
+            background-color: #16a34a;
+        }
+        
+        .hover\:bg-green-700:hover {
+            background-color: #15803d;
+        }
+        
+        .bg-gray-400 {
+            background-color: #9ca3af;
+        }
+        
+        .hover\:bg-gray-500:hover {
+            background-color: #6b7280;
+        }
+        
+        .p-1 {
+            padding: 0.25rem;
+        }
+        
+        .p-2 {
+            padding: 0.5rem;
+        }
+        
+        .p-3 {
+            padding: 0.75rem;
+        }
+        
+        .p-4 {
+            padding: 1rem;
+        }
+        
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+        
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        
+        .mr-1 {
+            margin-right: 0.25rem;
+        }
+        
+        .ml-1 {
+            margin-left: 0.25rem;
+        }
+        
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+        
+        .mx-1 {
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+        }
+        
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        
+        .w-full {
+            width: 100%;
+        }
+        
+        .w-16 {
+            width: 4rem;
+        }
+        
+        .w-4 {
+            width: 1rem;
+        }
+        
+        .max-w-6xl {
+            max-width: 72rem;
+        }
+        
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        
+        .border {
+            border: 1px solid #e5e7eb;
+        }
+        
+        .border-b {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .border-t {
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+        
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+        
+        .relative {
+            position: relative;
+        }
+        
+        .absolute {
+            position: absolute;
+        }
+        
+        .transform {
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+        }
+        
+        .-translate-y-1\/2 {
+            --tw-translate-y: -50%;
+        }
+        
+        .left-3 {
+            left: 0.75rem;
+        }
+        
+        .top-1\/2 {
+            top: 50%;
+        }
+        
+        .pl-10 {
+            padding-left: 2.5rem;
+        }
+        
+        .focus\:outline-none:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+        
+        .focus\:ring-1:focus {
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+        }
+        
+        .focus\:ring-blue-500:focus {
+            --tw-ring-color: #3b82f6;
+        }
+        
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+        
+        .max-h-64 {
+            max-height: 16rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .fixed {
+            position: fixed;
+        }
+        
+        .inset-0 {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .z-50 {
+            z-index: 50;
+        }
+        
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+        
+        .cursor-not-allowed {
+            cursor: not-allowed;
+        }
+        
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .transition-colors {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .hover\:shadow-sm:hover {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .active\:scale-\[0\.98\]:active {
+            transform: scale(0.98);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+        }
+        
+        .tab.inactive {
+            color: #6b7280;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 640px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .product-btn {
+            padding: 0.75rem;
+            background-color: #eff6ff;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-btn:hover {
+            background-color: #dbeafe;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .complement-btn {
+            background-color: #f0fdf4;
+        }
+        
+        .complement-btn:hover {
+            background-color: #dcfce7;
+        }
+        
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 20rem;
+        }
+        
+        .text-xxs {
+            font-size: 0.625rem;
+        }
+        
+        .border-dashed {
+            border-style: dashed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aicha Petit Terrain | Grill</h1>
+            <p class="text-sm text-gray-600">Système de facturation</p>
+        </header>
+
+        <div class="grid">
+            <!-- Section produits -->
+            <div class="lg:col-span-3 space-y-4">
+                <!-- Barre de recherche -->
+                <div class="card">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" width="18" height="18"></i>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Rechercher..."
+                            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                        />
+                    </div>
+                </div>
+
+                <!-- Onglets de navigation -->
+                <div class="tabs">
+                    <button id="fishTab" class="tab active">
+                        <i data-lucide="fish" class="inline mr-1" width="16" height="16"></i> Poissons
+                    </button>
+                    <button id="complementsTab" class="tab inactive">
+                        <i data-lucide="coffee" class="inline mr-1" width="16" height="16"></i> Compléments
+                    </button>
+                </div>
+
+                <!-- Liste des produits -->
+                <div class="card">
+                    <div id="fishSection">
+                        <h2 class="font-bold text-lg mb-3 flex items-center text-blue-800">
+                            <i data-lucide="fish" class="mr-1" width="18" height="18"></i> Poissons
+                        </h2>
+                        <div id="fishList" class="products-grid">
+                            <!-- Poissons seront ajoutés dynamiquement -->
+                        </div>
+                        <p id="noFishResults" class="text-center text-gray-500 py-3 text-sm hidden">Aucun résultat</p>
+                    </div>
+
+                    <div id="complementsSection" class="hidden">
+                        <h2 class="font-bold text-lg mb-3 flex items-center text-green-800">
+                            <i data-lucide="coffee" class="mr-1" width="18" height="18"></i> Compléments
+                        </h2>
+                        <div id="complementsList" class="products-grid">
+                            <!-- Compléments seront ajoutés dynamiquement -->
+                        </div>
+                        <p id="noComplementsResults" class="text-center text-gray-500 py-3 text-sm hidden">Aucun résultat</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panier -->
+            <div class="card sticky">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="font-bold text-lg flex items-center text-blue-800">
+                        <i data-lucide="calculator" class="mr-1" width="18" height="18"></i> Commande
+                    </h2>
+                    <button id="clearCartBtn" class="text-red-500 hover:text-red-700 transition-colors hidden" title="Vider le panier">
+                        <i data-lucide="trash-2" width="18" height="18"></i>
+                    </button>
+                </div>
+
+                <div id="emptyCart" class="text-center py-6">
+                    <div class="text-4xl mb-3">🛒</div>
+                    <p class="text-gray-500 text-sm">Panier vide</p>
+                </div>
+
+                <div id="cartContent" class="space-y-3 hidden">
+                    <div class="max-h-64 overflow-y-auto pr-1" id="cartItems">
+                        <!-- Articles du panier seront ajoutés dynamiquement -->
+                    </div>
+
+                    <div class="border-t pt-2">
+                        <div class="flex justify-between font-bold">
+                            <span>Total:</span>
+                            <span id="cartTotal">0 FCFA</span>
+                        </div>
+
+                        <button
+                            id="downloadTicketBtn"
+                            class="w-full mt-3 py-2 rounded-lg flex items-center justify-center transition-all bg-green-600 hover:bg-green-700 text-white shadow-md"
+                        >
+                            <i data-lucide="download" class="mr-1" width="18" height="18"></i> Télécharger Ticket
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket caché pour référence -->
+        <div class="hidden">
+            <div id="ticketRef" class="bg-white p-4 font-mono text-base leading-relaxed" style="width: auto; max-width: 290px;">
+                <div class="text-center font-bold pb-1 mb-1">
+                    AICHA PETIT TERRAIN | GRILL
+                </div>
+                <div style="color: white;">GO</div>
+                 <div class="text-center font-bold  ">
+                    REÇU DE COMMANDE
+                </div>
+                <div class="text-center text-xs mb-2" id="ticketDate"></div>
+                <div id="ticketItems">
+                    <!-- Articles du ticket seront ajoutés dynamiquement -->
+                </div>
+                <div>
+
+                </div>
+                <div class="  font-bold"> 
+                    <div><center>----------</center></div>
+                    <div >
+                        <div style="color: white;">GO</div>
+                       
+                        <span>TOTAL:</span>
+                        <span id="ticketTotal">0 FCFA</span>
+                       
+                    </div> 
+                    <div> <center>----------</center></div>
+                    <div style="color: white;">GO</div>
+                    <div style="color: white;">GO</div>
+                    <div style="color: white;">GO</div>
+                </div>
+                <div class="text-center text-xx mt-4">
+                    <p>Merci pour votre visite ❤️</p>
+                    <p>Pour toute commande, contactez :</p>
+                    <p style="font-weight: bold;">Tel: 6 96 22 64 94</p>
+                    <p>Adresse: Petit Terrain, Bonamoussadi</p>
+                    <p>***</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal pour prix personnalisé - Maintenant caché par défaut avec hidden -->
+        <div id="priceModal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="font-bold text-lg mb-3 text-center" id="modalTitle">Prix pour [produit]</h3>
+                <input
+                    type="number"
+                    id="customPriceInput"
+                    class="w-full p-2 border rounded-lg text-center focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    placeholder="Prix en FCFA"
+                />
+                <div class="flex gap-2 mt-3">
+                    <button
+                        id="cancelPriceBtn"
+                        class="flex-1 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-lg text-sm"
+                    >
+                        Annuler
+                    </button>
+                    <button
+                        id="confirmPriceBtn"
+                        class="flex-1 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm"
+                    >
+                        Valider
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données de l'application
+        const fishTypes = [
+            {id: 'maqueureau', name: 'Maqueureau', image: '🐟', category: 'fish'},
+            {id: 'tilapia', name: 'Tilapia', image: '🐟', category: 'fish'},
+            {id: 'carpe', name: 'Carpe', image: '🐠', category: 'fish'},
+            {id: 'machoiron', name: 'Machoiron', image: '🐡', category: 'fish'},
+            {id: 'capitaine', name: 'Capitaine', image: '🦈', category: 'fish'},
+            {id: 'sole', name: 'Sole', image: '🐟', category: 'fish'},
+            {id: 'bar', name: 'Bar', image: '🐟', category: 'fish'},
+            {id: 'bossu', name: 'Bossu', image: '🐠', category: 'fish'},
+        ];
+
+        const complements = [
+            {id: 'mayonnaise', name: 'Mayonnaise', price: 150, image: '🍯'},
+            {id: 'plantain', name: 'Plantain', price: 500, image: '🍌'},
+            {id: 'frites', name: 'Frites', price: 500, image: '🍟'},
+            {id: 'Miondo', name: 'Miondo', price: 0, customPrice: true, image: '🥢'}
+        ];
+
+        // État de l'application
+        let cart = [];
+        let selectedItem = null;
+        let activeTab = 'fish';
+
+        // Éléments DOM
+        const searchInput = document.getElementById('searchInput');
+        const fishTab = document.getElementById('fishTab');
+        const complementsTab = document.getElementById('complementsTab');
+        const fishSection = document.getElementById('fishSection');
+        const complementsSection = document.getElementById('complementsSection');
+        const fishList = document.getElementById('fishList');
+        const complementsList = document.getElementById('complementsList');
+        const noFishResults = document.getElementById('noFishResults');
+        const noComplementsResults = document.getElementById('noComplementsResults');
+        const emptyCart = document.getElementById('emptyCart');
+        const cartContent = document.getElementById('cartContent');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const clearCartBtn = document.getElementById('clearCartBtn');
+        const downloadTicketBtn = document.getElementById('downloadTicketBtn');
+        const priceModal = document.getElementById('priceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const customPriceInput = document.getElementById('customPriceInput');
+        const cancelPriceBtn = document.getElementById('cancelPriceBtn');
+        const confirmPriceBtn = document.getElementById('confirmPriceBtn');
+        const ticketRef = document.getElementById('ticketRef');
+        const ticketDate = document.getElementById('ticketDate');
+        const ticketItems = document.getElementById('ticketItems');
+        const ticketTotal = document.getElementById('ticketTotal');
+
+        // Initialisation de l'application
+        function init() {
+            // S'assurer que le modal est caché au démarrage
+            priceModal.classList.add('hidden');
+            
+            renderFishList(fishTypes);
+            renderComplementsList(complements);
+            
+            // Événements
+            searchInput.addEventListener('input', handleSearch);
+            fishTab.addEventListener('click', () => switchTab('fish'));
+            complementsTab.addEventListener('click', () => switchTab('complements'));
+            clearCartBtn.addEventListener('click', clearCart);
+            downloadTicketBtn.addEventListener('click', downloadTicket);
+            cancelPriceBtn.addEventListener('click', () => {
+                priceModal.classList.add('hidden');
+                selectedItem = null;
+            });
+            confirmPriceBtn.addEventListener('click', confirmCustomPrice);
+            customPriceInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') confirmCustomPrice();
+            });
+            
+            // Initialiser les icônes Lucide
+            lucide.createIcons();
+        }
+
+        // Afficher la liste des poissons
+        function renderFishList(fishArray) {
+            fishList.innerHTML = '';
+            
+            if (fishArray.length === 0) {
+                noFishResults.classList.remove('hidden');
+                return;
+            }
+            
+            noFishResults.classList.add('hidden');
+            
+            fishArray.forEach(fish => {
+                const button = document.createElement('button');
+                button.className = 'product-btn';
+                button.innerHTML = `
+                    <div class="text-3xl mb-1">${fish.image}</div>
+                    <div class="font-medium text-gray-800 text-sm">${fish.name}</div>
+                `;
+                button.addEventListener('click', () => addFishToCart(fish));
+                fishList.appendChild(button);
+            });
+        }
+
+        // Afficher la liste des compléments
+        function renderComplementsList(complementsArray) {
+            complementsList.innerHTML = '';
+            
+            if (complementsArray.length === 0) {
+                noComplementsResults.classList.remove('hidden');
+                return;
+            }
+            
+            noComplementsResults.classList.add('hidden');
+            
+            complementsArray.forEach(comp => {
+                const button = document.createElement('button');
+                button.className = 'product-btn complement-btn';
+                button.innerHTML = `
+                    <div class="text-3xl mb-1">${comp.image}</div>
+                    <div class="font-medium text-gray-800 text-sm">${comp.name}</div>
+                    ${comp.price > 0 ? `<div class="text-xs text-gray-600 mt-1">${comp.price} FCFA</div>` : ''}
+                `;
+                button.addEventListener('click', () => addComplementToCart(comp));
+                complementsList.appendChild(button);
+            });
+        }
+
+        // Gérer la recherche
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (activeTab === 'fish') {
+                const filteredFish = fishTypes.filter(fish => 
+                    fish.name.toLowerCase().includes(searchTerm)
+                );
+                renderFishList(filteredFish);
+            } else {
+                const filteredComplements = complements.filter(comp => 
+                    comp.name.toLowerCase().includes(searchTerm)
+                );
+                renderComplementsList(filteredComplements);
+            }
+        }
+
+        // Changer d'onglet
+        function switchTab(tab) {
+            activeTab = tab;
+            
+            if (tab === 'fish') {
+                fishTab.classList.remove('inactive');
+                fishTab.classList.add('active');
+                complementsTab.classList.remove('active');
+                complementsTab.classList.add('inactive');
+                fishSection.classList.remove('hidden');
+                complementsSection.classList.add('hidden');
+                handleSearch(); // Re-filtrer les résultats
+            } else {
+                complementsTab.classList.remove('inactive');
+                complementsTab.classList.add('active');
+                fishTab.classList.remove('active');
+                fishTab.classList.add('inactive');
+                complementsSection.classList.remove('hidden');
+                fishSection.classList.add('hidden');
+                handleSearch(); // Re-filtrer les résultats
+            }
+        }
+
+        // Ajouter un poisson au panier (avec prix personnalisé)
+        function addFishToCart(fish) {
+            if (!fish) return;
+            
+            selectedItem = {...fish, category: 'fish'};
+            modalTitle.textContent = `Prix pour ${fish.name}`;
+            customPriceInput.value = '';
+            priceModal.classList.remove('hidden');
+            customPriceInput.focus();
+        }
+
+        // Ajouter un complément au panier
+        function addComplementToCart(comp) {
+            if (!comp) return;
+            
+            if (comp.customPrice) {
+                selectedItem = {...comp, category: 'complement'};
+                modalTitle.textContent = `Prix pour ${comp.name}`;
+                customPriceInput.value = '';
+                priceModal.classList.remove('hidden');
+                customPriceInput.focus();
+                return;
+            }
+            
+            const existing = cart.find(c => c.productId === comp.id);
+            if (existing) {
+                updateQuantity(existing.id, existing.quantity + 1);
+            } else {
+                addToCart({
+                    id: Date.now(),
+                    productId: comp.id,
+                    name: comp.name,
+                    price: comp.price,
+                    quantity: 1,
+                    image: comp.image,
+                    category: 'complement'
+                });
+            }
+        }
+
+        // Confirmer le prix personnalisé
+        function confirmCustomPrice() {
+            if (!selectedItem) {
+                priceModal.classList.add('hidden');
+                return;
+            }
+            
+            const price = parseFloat(customPriceInput.value);
+            
+            if (!price || price <= 0) {
+                alert("Veuillez entrer un prix valide");
+                return;
+            }
+            
+            const newItem = {
+                id: Date.now(),
+                productId: selectedItem.id,
+                name: selectedItem.name,
+                price: price,
+                quantity: 1,
+                image: selectedItem.image,
+                category: selectedItem.category
+            };
+            
+            addToCart(newItem);
+            priceModal.classList.add('hidden');
+            selectedItem = null;
+        }
+
+        // Ajouter un article au panier
+        function addToCart(item) {
+            cart.push(item);
+            updateCart();
+        }
+
+        // Mettre à jour la quantité d'un article
+        function updateQuantity(id, qty) {
+            if (qty <= 0) {
+                removeFromCart(id);
+            } else {
+                cart = cart.map(i => i.id === id ? {...i, quantity: qty} : i);
+                updateCart();
+            }
+        }
+
+        // Supprimer un article du panier
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCart();
+        }
+
+        // Vider le panier
+        function clearCart() {
+            if (cart.length > 0 && !confirm("Voulez-vous vraiment vider le panier?")) return;
+            cart = [];
+            updateCart();
+        }
+
+        // Mettre à jour l'affichage du panier
+        function updateCart() {
+            if (cart.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartContent.classList.add('hidden');
+                clearCartBtn.classList.add('hidden');
+                return;
+            }
+            
+            emptyCart.classList.add('hidden');
+            cartContent.classList.remove('hidden');
+            clearCartBtn.classList.remove('hidden');
+            
+            // Afficher les articles du panier
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex justify-between items-center py-1 border-b';
+                itemDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="mr-1">${item.image}</span>
+                        <span class="text-sm">${item.name}</span>
+                    </div>
+                    <div class="flex items-center">
+                        <button class="p-1 text-gray-500 hover:text-red-500" data-id="${item.id}" data-action="decrease">
+                            <i data-lucide="minus" width="14" height="14"></i>
+                        </button>
+                        <span class="mx-1 text-sm w-4 text-center">${item.quantity}</span>
+                        <button class="p-1 text-gray-500 hover:text-green-500" data-id="${item.id}" data-action="increase">
+                            <i data-lucide="plus" width="14" height="14"></i>
+                        </button>
+                        <span class="ml-2 font-medium text-sm w-16 text-right">${item.price * item.quantity} FCFA</span>
+                    </div>
+                `;
+                cartItems.appendChild(itemDiv);
+            });
+            
+            // Mettre à jour les icônes Lucide
+            lucide.createIcons();
+            
+            // Ajouter les événements pour les boutons +/-
+            document.querySelectorAll('[data-action="increase"]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(btn.parentElement.querySelector('[data-id]').getAttribute('data-id'));
+                    const item = cart.find(i => i.id === id);
+                    if (item) updateQuantity(id, item.quantity + 1);
+                });
+            });
+            
+            document.querySelectorAll('[data-action="decrease"]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(btn.parentElement.querySelector('[data-id]').getAttribute('data-id'));
+                    const item = cart.find(i => i.id === id);
+                    if (item) updateQuantity(id, item.quantity - 1);
+                });
+            });
+            
+            // Mettre à jour le total
+            const total = calculateTotal();
+            cartTotal.textContent = `${total} FCFA`;
+        }
+
+        // Calculer le total du panier
+        function calculateTotal() {
+            return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        }
+
+        // Télécharger le ticket
+               // Télécharger le ticket - VERSION CORRIGÉE
+        async function downloadTicket() {
+            if (cart.length === 0) return;
+
+            try {
+                // Mettre à jour le ticket de référence
+                const currentDate = new Date().toLocaleString();
+                ticketDate.textContent = currentDate;
+
+                ticketItems.innerHTML = '';
+                cart.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex justify-between py-1';
+                    itemDiv.innerHTML = `
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>${item.price * item.quantity} FCFA</span>
+                    `;
+                    ticketItems.appendChild(itemDiv);
+                });
+
+                const total = calculateTotal();
+                ticketTotal.textContent = `${total} FCFA`;
+
+                // Rendre le ticket visible pour la capture
+                ticketRef.parentElement.classList.remove('hidden');
+
+                // Générer l'image du ticket
+                const canvas = await html2canvas(ticketRef);
+
+                // Recacher le ticket après la capture
+                ticketRef.parentElement.classList.add('hidden');
+
+                // Télécharger l'image
+                const dataURL = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = `ticket-${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Vider le panier après téléchargement
+                cart = [];
+                updateCart();
+
+            } catch (error) {
+                console.error('Erreur lors de la génération du ticket:', error);
+                alert("Une erreur est survenue lors de la génération du ticket");
+            }
+        }
+        // Démarrer l'application
+        init();
+    </script>
+    
+    <!-- Bibliothèque pour convertir HTML en image -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
